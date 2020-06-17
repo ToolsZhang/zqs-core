@@ -15,7 +15,7 @@ let io: SocketIO.Server;
  * To use this, just create a file named socket.ts in your api directory.
  * Paste following code to the file
  * ```ts
- * import { Socket } form '@zqs/core/lib/socket';
+ * import { Socket } form 'zqs-core/lib/socket';
  *
  * export default new Socket('room_name_here');
  * ```

@@ -16,7 +16,7 @@ gulp.task("typedoc", function () {
             out: "./docs",
 
             // TypeDoc options (see typedoc docs)
-            name: "zqs/core",
+            name: "zqs-core",
             ignoreCompilerErrors: true,
             version: true,
         }))
