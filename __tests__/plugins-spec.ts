@@ -1,9 +1,9 @@
-// import { setup } from '../src/plugins';
-// import * as mr from 'mock-require';
-// import * as fs from 'fs';
+import { setup } from '../src/plugins';
+import * as mr from 'mock-require';
+import * as fs from 'fs';
 
-// console.log = jest.fn();
-// console.error = jest.fn();
+console.log = jest.fn();
+console.error = jest.fn();
 
 // const zpb: any = require('zqs-plugin-bookmark');
 
@@ -20,13 +20,13 @@
 // });
 
 // //  26,27,28,29,30
-// test('it should setup a plugin failed', async () => {
-//   const app: any = {
-//     dir: '/notExists',
-//   };
-//   const res = await setup(app, 'pre');
-//   expect(res).toBeFalsy();
-// });
+test('it should setup a plugin failed', async () => {
+  const app: any = {
+    dir: '/notExists',
+  };
+  const res = await setup(app, 'pre');
+  expect(res).toBeFalsy();
+});
 
 // test('it should setup a plugin', async () => {
 //   const app: any = {

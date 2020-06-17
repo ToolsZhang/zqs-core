@@ -2,7 +2,8 @@
   "name": "@zqs/core",
   "version": "0.0.1",
   "description": "A simple restful server framework using node and typescript",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "test": "jest",
     "clean": "rimraf lib && rimraf coverage",

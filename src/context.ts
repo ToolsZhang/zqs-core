@@ -2,10 +2,8 @@ import { Request } from 'koa';
 import { IRouterContext } from 'koa-router';
 
 /**
+ *
  * Request object
-/**
- *
- *
  * @export
  * @interface IRequest
  * @extends {Request}

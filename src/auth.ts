@@ -10,7 +10,6 @@ import { IContext } from './context';
 import { handleError } from './errors';
 
 export async function setup(app: Zqs) {
-  let that = this;
   AuthSchema = new mongoose.Schema(
     {
       password: {
@@ -65,149 +64,148 @@ export async function setup(app: Zqs) {
   ).plugin(uniqueValidator, {
     message: app.config.auth.messages.errors.username_already_in_use,
   });
-  // AuthSchema.plugin(mongoosePaginate);
+  AuthSchema.plugin(mongoosePaginate);
 
-  // AuthSchema.pre('validate', async function (next) {
-  //     // Handle new/update passwords
-  //     if (!this.isModified('password')) return next();
+  AuthSchema.pre('validate', async function(next) {
+    // Handle new/update passwords
+    if (!this.isModified('password')) return next();
 
-  //     // Password must not be empty if there is no any providers
-  //     if (!this['password'] || !this['password'].length) {
-  //         if (!this['providers'] || !this['providers'].length)
-  //             return next(
-  //                 boom.badData(app.config.auth.messages.errors.invalid_password)
-  //             );
-  //         return next();
-  //     }
+    // Password must not be empty if there is no any providers
+    if (!this['password'] || !this['password'].length) {
+      if (!this['providers'] || !this['providers'].length)
+        return next(
+          boom.badData(app.config.auth.messages.errors.invalid_password)
+        );
+      return next();
+    }
 
-  //     // Make salt
-  //     try {
-  //         this['salt'] = await makeSalt();
-  //         const hashedPassword = await encryptPassword(this['password']);
-  //         this['password'] = hashedPassword;
-  //         next();
-  //     } catch (e) {
-  //         next(e);
-  //     }
+    // Make salt
+    try {
+      this['salt'] = await makeSalt();
+      const hashedPassword = await encryptPassword(this['password']);
+      this['password'] = hashedPassword;
+      next();
+    } catch (e) {
+      next(e);
+    }
 
-  //     /**
-  //      * Make salt
-  //      *
-  //      * @param {Number} byteSize Optional salt byte size, default to 16
-  //      * @return {String}
-  //      * @api public
-  //      */
-  //     function makeSalt(byteSize: number = 16): Promise<any> {
-  //         return new Promise((resolve, reject) => {
-  //             crypto.randomBytes(byteSize, (err, salt) => {
-  //                 if (err) {
-  //                     reject(err);
-  //                 } else {
-  //                     resolve(salt.toString('base64'));
-  //                 }
-  //             });
-  //         });
-  //     }
+    /**
+     * Make salt
+     *
+     * @param {Number} byteSize Optional salt byte size, default to 16
+     * @return {String}
+     * @api public
+     */
+    function makeSalt(byteSize: number = 16): Promise<any> {
+      return new Promise((resolve, reject) => {
+        crypto.randomBytes(byteSize, (err, salt) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(salt.toString('base64'));
+          }
+        });
+      });
+    }
 
-  //     /**
-  //      * Encrypt password
-  //      *
-  //      * @param {String} password
-  //      * @return {String}
-  //      * @api public
-  //      */
-  //     function encryptPassword(password): Promise<string> {
-  //         return new Promise((resolve, reject) => {
-  //             if (!password || !this.salt)
-  //                 reject(new Error('Missing password or salt'));
-  //             const defaultIterations = 10000;
-  //             const defaultKeyLength = 64;
-  //             const salt = new Buffer(this.salt, 'base64');
-  //             return crypto.pbkdf2(
-  //                 password,
-  //                 salt,
-  //                 defaultIterations,
-  //                 defaultKeyLength,
-  //                 'sha256',
-  //                 (err, key) => {
-  //                     if (err) {
-  //                         reject(err);
-  //                     } else {
-  //                         resolve(key.toString('base64'));
-  //                     }
-  //                 }
-  //             );
-  //         });
-  //     }
-
-  // });
+    /**
+     * Encrypt password
+     *
+     * @param {String} password
+     * @return {String}
+     * @api public
+     */
+    function encryptPassword(password): Promise<string> {
+      return new Promise((resolve, reject) => {
+        if (!password || !this.salt)
+          reject(new Error('Missing password or salt'));
+        const defaultIterations = 10000;
+        const defaultKeyLength = 64;
+        const salt = new Buffer(this.salt, 'base64');
+        return crypto.pbkdf2(
+          password,
+          salt,
+          defaultIterations,
+          defaultKeyLength,
+          'sha256',
+          (err, key) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(key.toString('base64'));
+            }
+          }
+        );
+      });
+    }
+  });
 
   /**
    * Methods
    */
-  // AuthSchema.methods = {
-  //     /**
-  //      * Authenticate - check if the passwords are the same
-  //      *
-  //      * @param {String} password
-  //      * @return {Boolean}
-  //      * @api public
-  //      */
-  //     async authenticate(password): Promise<boolean> {
-  //         const pwdGen = await this.encryptPassword(password);
-  //         return this.password === pwdGen;
-  //     },
+  AuthSchema.methods = {
+    /**
+     * Authenticate - check if the passwords are the same
+     *
+     * @param {String} password
+     * @return {Boolean}
+     * @api public
+     */
+    async authenticate(password): Promise<boolean> {
+      const pwdGen = await this.encryptPassword(password);
+      return this.password === pwdGen;
+    },
 
-  //     /**
-  //      * Make salt
-  //      *
-  //      * @param {Number} byteSize Optional salt byte size, default to 16
-  //      * @return {String}
-  //      * @api public
-  //      */
-  //     makeSalt(byteSize: number = 16): Promise<any> {
-  //         return new Promise((resolve, reject) => {
-  //             crypto.randomBytes(byteSize, (err, salt) => {
-  //                 if (err) {
-  //                     reject(err);
-  //                 } else {
-  //                     resolve(salt.toString('base64'));
-  //                 }
-  //             });
-  //         });
-  //     },
+    /**
+     * Make salt
+     *
+     * @param {Number} byteSize Optional salt byte size, default to 16
+     * @return {String}
+     * @api public
+     */
+    makeSalt(byteSize: number = 16): Promise<any> {
+      return new Promise((resolve, reject) => {
+        crypto.randomBytes(byteSize, (err, salt) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(salt.toString('base64'));
+          }
+        });
+      });
+    },
 
-  //     /**
-  //      * Encrypt password
-  //      *
-  //      * @param {String} password
-  //      * @return {String}
-  //      * @api public
-  //      */
-  //     encryptPassword(password): Promise<string> {
-  //         return new Promise((resolve, reject) => {
-  //             if (!password || !this.salt)
-  //                 reject(new Error('Missing password or salt'));
-  //             const defaultIterations = 10000;
-  //             const defaultKeyLength = 64;
-  //             const salt = new Buffer(this.salt, 'base64');
-  //             return crypto.pbkdf2(
-  //                 password,
-  //                 salt,
-  //                 defaultIterations,
-  //                 defaultKeyLength,
-  //                 'sha256',
-  //                 (err, key) => {
-  //                     if (err) {
-  //                         reject(err);
-  //                     } else {
-  //                         resolve(key.toString('base64'));
-  //                     }
-  //                 }
-  //             );
-  //         });
-  //     },
-  // };
+    /**
+     * Encrypt password
+     *
+     * @param {String} password
+     * @return {String}
+     * @api public
+     */
+    encryptPassword(password): Promise<string> {
+      return new Promise((resolve, reject) => {
+        if (!password || !this.salt)
+          reject(new Error('Missing password or salt'));
+        const defaultIterations = 10000;
+        const defaultKeyLength = 64;
+        const salt = new Buffer(this.salt, 'base64');
+        return crypto.pbkdf2(
+          password,
+          salt,
+          defaultIterations,
+          defaultKeyLength,
+          'sha256',
+          (err, key) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(key.toString('base64'));
+            }
+          }
+        );
+      });
+    },
+  };
 
   AuthModel = mongoose.model('__auth', AuthSchema);
   signToken = (doc: mongoose.Document, options: jwt.SignOptions) => {

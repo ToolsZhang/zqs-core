@@ -77,7 +77,7 @@ export class Zqs extends koa {
     // Setting cors
     if (this.config.cors) this.use(cors(this.config.cors));
 
-    //Format body
+    // Format body
     this.use(
       convert(
         body({
