@@ -37,7 +37,7 @@ export class DocSchema {
   private __paginateResult: IDocsDataTypeItem;
   private __body: IDocsParameter;
 
-  constructor(private model: mongoose.PaginateModel<mongoose.Document>) { }
+  constructor(private model: mongoose.PaginateModel<mongoose.Document>) {}
 
   /**
    * The swagger ui schema
@@ -319,11 +319,11 @@ export interface IDocs {
      * Auth type
      */
     type?:
-    | 'attach'
-    | 'isAuthenticated'
-    | 'owns'
-    | 'hasRoles'
-    | 'ownsOrHasRoles';
+      | 'attach'
+      | 'isAuthenticated'
+      | 'owns'
+      | 'hasRoles'
+      | 'ownsOrHasRoles';
 
     /**
      * Required when type is hasRoles or ownsOrHasRoles
