@@ -1,0 +1,14 @@
+__tests__/
+.vscode/
+coverage/
+node_modules/
+src/
+.editorconfig
+.gitignore
+.nyc_output
+npm-debug.log
+yarn-error.log
+yarn.lock
+tsconfig.json
+tslint.json
+gulpfile.js
