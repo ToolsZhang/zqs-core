@@ -11,7 +11,7 @@ gulp.task("typedoc", function () {
             module: "commonjs",
             target: "es6",
             includeDeclarations: false,
-
+            readme: "./docs/md",
             // Output options (see typedoc docs)
             out: "./docs",
 

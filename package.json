@@ -13,7 +13,7 @@
     "prebuild": "npm run clean && npm run format && npm run lint && echo Using TypeScript && tsc --version",
     "coverage": "jest --coverage",
     "watch": "npm run build -- --watch",
-    "docs": "gulp typedoc",
+    "docs": "gulp typedoc --plugin typedoc-plugin-markdown",
     "build": "tsc --pretty",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
     "format": "prettier --write \"{src,__tests__}/**/*.ts\" --single-quote --trailing-comma es5"
@@ -92,6 +92,7 @@
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
     "typedoc": "~0.15.0",
+    "typedoc-plugin-markdown": "~2.1.0",
     "typescript": "^3.9.5",
     "zqs-plugin-bookmark": "^1.0.0"
   },
