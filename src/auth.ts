@@ -54,7 +54,7 @@ export async function setup(app: Zqs) {
         validate: {
           validator(v) {
             if (this.providers && this.providers.length) return true;
-            return false;
+            return v.length;
           },
           message: app.config.auth.messages.errors.empty_username,
         },
@@ -82,7 +82,7 @@ export async function setup(app: Zqs) {
     // Make salt
     try {
       this['salt'] = await makeSalt();
-      const hashedPassword = await encryptPassword(this['password']);
+      const hashedPassword = await encryptPassword(this['password'],this['salt']);
       this['password'] = hashedPassword;
       next();
     } catch (e) {
@@ -115,16 +115,16 @@ export async function setup(app: Zqs) {
      * @return {String}
      * @api public
      */
-    function encryptPassword(password): Promise<string> {
+    function encryptPassword(password,salt): Promise<string> {
       return new Promise((resolve, reject) => {
-        if (!password || !this.salt)
+        if (!password || !salt)
           reject(new Error('Missing password or salt'));
         const defaultIterations = 10000;
         const defaultKeyLength = 64;
-        const salt = new Buffer(this.salt, 'base64');
+        const salt_ = new Buffer(salt, 'base64');
         return crypto.pbkdf2(
           password,
-          salt,
+          salt_,
           defaultIterations,
           defaultKeyLength,
           'sha256',
