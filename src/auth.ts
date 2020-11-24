@@ -82,7 +82,10 @@ export async function setup(app: Zqs) {
     // Make salt
     try {
       this['salt'] = await makeSalt();
-      const hashedPassword = await encryptPassword(this['password'],this['salt']);
+      const hashedPassword = await encryptPassword(
+        this['password'],
+        this['salt']
+      );
       this['password'] = hashedPassword;
       next();
     } catch (e) {
@@ -115,10 +118,9 @@ export async function setup(app: Zqs) {
      * @return {String}
      * @api public
      */
-    function encryptPassword(password,salt): Promise<string> {
+    function encryptPassword(password, salt): Promise<string> {
       return new Promise((resolve, reject) => {
-        if (!password || !salt)
-          reject(new Error('Missing password or salt'));
+        if (!password || !salt) reject(new Error('Missing password or salt'));
         const defaultIterations = 10000;
         const defaultKeyLength = 64;
         const salt_ = new Buffer(salt, 'base64');
