@@ -3,7 +3,7 @@ import * as spdy from 'spdy';
 import * as moment from 'moment';
 import { Zqs } from './app';
 
-export async function setup(app: Zqs): Promise<Boolean> {
+export async function setup(app: Zqs): Promise<boolean> {
   if (!app.config.spdy) return false;
   spdy
     .createServer(app.config.spdy.options, app.callback())

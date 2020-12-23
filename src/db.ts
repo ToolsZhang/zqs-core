@@ -133,7 +133,7 @@ export async function paginate(
       throw Boom.boomify(e, { statusCode: 422 });
     }
   }
-  return await model.paginate(_filters, _options);
+  return model.paginate(_filters, _options);
 }
 
 /**
@@ -166,7 +166,7 @@ export async function show(
   if (_options.select) query = query.select(_options.select);
   if (_options.populate) query = query.populate(_options.populate);
 
-  return await query.exec();
+  return query.exec();
 }
 
 /**
