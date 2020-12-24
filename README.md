@@ -3,4 +3,4 @@ A simple restful server framework using node and typescript
 
 
 
-[Documentation](https://github.com/ToolsZhang/zqs-core/blob/master/docs/index.html)
+[Documentation](https://toolszhang.github.io/zqs-core/)
