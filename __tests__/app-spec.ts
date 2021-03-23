@@ -1,6 +1,6 @@
 import { Zqs } from '../src/app';
 
-console.log = jest.fn();
+// console.log = jest.fn();
 console.error = jest.fn();
 
 jest.mock(`../src/auth.ts`, () => {

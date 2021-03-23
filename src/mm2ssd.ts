@@ -2,7 +2,7 @@ import { Model, Schema, SchemaType, SchemaTypes } from 'mongoose';
 
 interface ISchemaType extends SchemaType {
   casterConstructor: any;
-  constructor: Function;
+  constructor: any;
   enumValues: any[];
   path: string;
   instance: string;

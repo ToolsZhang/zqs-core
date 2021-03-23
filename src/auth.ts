@@ -439,4 +439,9 @@ export interface IConfig {
    * Default roles to sign to new user.
    */
   defaultRoles: string[];
+
+  /**
+   * expressed in seconds or a string describing a time span  Eg: 60, "2 days", "10h", "7d"
+   */
+  expiresIn?: string | number;
 }

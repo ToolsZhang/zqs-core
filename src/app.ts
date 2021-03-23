@@ -8,6 +8,7 @@ import * as etag from 'koa-etag';
 import * as logger from 'koa-logger';
 import * as qs from 'qs';
 import * as xml2json from 'xml2json';
+import { logger as setupLogger } from './logger';
 import { setup as setupAuth } from './auth';
 import { setup as setupHttp } from './http';
 import { setup as setupSpdy } from './spdy';
@@ -70,9 +71,16 @@ export class Zqs extends koa {
    */
   public async start() {
     await setupMongodb(this);
-
     // Writing Middleware
-    this.use(logger());
+
+    // Setting Logger
+    this.use(
+      await setupLogger({
+        transporter: (str: string, ...args: string[]) => {
+          console.log(str);
+        },
+      })
+    );
 
     // Setting cors
     if (this.config.cors) this.use(cors(this.config.cors));

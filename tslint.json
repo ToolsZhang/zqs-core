@@ -8,6 +8,8 @@
     "no-angle-bracket-type-assertion": false,
     "no-bitwise": false,
     "no-console": false,
+    "array-type": false,
+    "no-submodule-imports": false,
     "no-shadowed-variable": false,
     "no-string-literal": false,
     "no-unused-expression": false,
