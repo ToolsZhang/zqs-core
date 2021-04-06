@@ -120,7 +120,8 @@ export async function setup(app: Zqs) {
      */
     function encryptPassword(password, salt): Promise<string> {
       return new Promise((resolve, reject) => {
-        if (!password || !salt) reject(new Error('Missing password or salt'));
+        if (!password) reject(new Error('Missing password'));
+        if (!salt) reject(new Error('Missing salt'));
         const defaultIterations = 10000;
         const defaultKeyLength = 64;
         const salt_ = new Buffer(salt, 'base64');
@@ -186,8 +187,8 @@ export async function setup(app: Zqs) {
      */
     encryptPassword(password): Promise<string> {
       return new Promise((resolve, reject) => {
-        if (!password || !this.salt)
-          reject(new Error('Missing password or salt'));
+        if (!password) reject(new Error('Missing password'));
+        if (!this.salt) reject(new Error('Missing salt'));
         const defaultIterations = 10000;
         const defaultKeyLength = 64;
         const salt = new Buffer(this.salt, 'base64');
@@ -208,7 +209,7 @@ export async function setup(app: Zqs) {
       });
     },
   };
-
+  mongoose.set('useCreateIndex', true);
   AuthModel = mongoose.model('__auth', AuthSchema);
   signToken = (doc: mongoose.Document, options: jwt.SignOptions) => {
     return jwt.sign(
@@ -286,6 +287,24 @@ export async function setup(app: Zqs) {
     ]);
   };
 
+  hasLoggerRoles = (...roles: string[]) => {
+    return compose([
+      isAuthenticated(),
+      async (ctx: IContext, next) => {
+        try {
+          for (const role of roles) {
+            if (!ctx.request.auth.roles.includes(role))
+              throw boom.forbidden(
+                app.config.auth.messages.errors.no_permission
+              );
+          }
+          await next();
+        } catch (e) {
+          handleError(ctx, e);
+        }
+      },
+    ]);
+  };
   owns = model => {
     return compose([
       isAuthenticated(),
@@ -390,6 +409,12 @@ export let isAuthenticated: () => any;
  * @param roles {string[]} specified roles
  */
 export let hasRoles: (...roles: string[]) => any;
+
+/**
+ * Middleware to check if the logger has specified roles.
+ * @param roles {string[]} specified roles
+ */
+export let hasLoggerRoles: (...roles: string[]) => any;
 
 /**
  * Middleware to check if the authenticated user owns the document by checking the field __auth.

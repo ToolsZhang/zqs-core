@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "test": "jest",
+    "test": "npm run build && node lib/test.js",
     "clean": "rimraf lib && rimraf coverage",
     "watch:test": "jest --watch",
     "unit:test": "jest ./__tests__/app-spec.ts ",
@@ -46,6 +46,8 @@
     "@types/socket.io-redis": "^1.0.26",
     "@types/spdy": "^3.4.4",
     "@types/xml2json": "^0.11.0",
+    "@types/ua-parser-js": "^0.7.35",
+    "ua-parser-js": "^0.7.25",
     "bytes": "^3.1.0",
     "chalk": "^4.1.0",
     "colors": "^1.4.0",

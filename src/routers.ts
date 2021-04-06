@@ -9,9 +9,9 @@ import * as lodash from 'lodash';
 import * as path from 'path';
 import { promisify } from 'typed-promisify';
 import { IContext } from './context';
-import { IModel } from './db';
+import { IModel, paginate } from './db';
 import { IDocs } from './docs';
-import { handleError } from './errors';
+import { Boom, handleError } from './errors';
 import { routers as pluginRouters } from './plugins';
 import { response } from './response';
 import { Zqs } from './app';
@@ -22,20 +22,25 @@ import {
   isAuthenticated,
   owns,
   ownsOrHasRoles,
+  hasLoggerRoles,
   signToken,
 } from './auth';
+import { LoginInforModel, OperateLogModel } from './logger';
 
 export async function setup(app: Zqs) {
   const docs: Router[] = [];
   const apiDir = path.join(app.dir, 'api');
-  const dirs = await promisify(fs.readdir)(apiDir);
-  for (const dir of dirs) {
-    if (/^\./.test(dir)) continue;
-    const stat = await promisify(fs.stat)(`${apiDir}/${dir}/router.js`);
-    if (stat.isFile) {
-      const router: Router = require(`${app.dir}/api/${dir}/router`).default;
-      app.use(router.routes());
-      docs.push(router);
+
+  if (!app.config.type || app.config.type !== 'test') {
+    const dirs = await promisify(fs.readdir)(apiDir);
+    for (const dir of dirs) {
+      if (/^\./.test(dir)) continue;
+      const stat = await promisify(fs.stat)(`${apiDir}/${dir}/router.js`);
+      if (stat.isFile) {
+        const router: Router = require(`${app.dir}/api/${dir}/router`).default;
+        app.use(router.routes());
+        docs.push(router);
+      }
     }
   }
 
@@ -48,12 +53,22 @@ export async function setup(app: Zqs) {
   }
 
   /**
+   * Add logger
+   */
+  app.use(LoginInforRouter.routes());
+  docs.push(LoginInforRouter);
+  app.use(OperateLogRouter.routes());
+  docs.push(OperateLogRouter);
+
+  /**
    * Add plugin
    */
   for (const router of pluginRouters) {
     app.use(router.routes());
     docs.push(router);
   }
+
+  if (app.config.type && app.config.type === 'test') return;
 
   const docsPath = path.join(app.config.root, 'docs', 'www');
   const prefix = app.config.docs.path;
@@ -178,6 +193,8 @@ export class Router {
               break;
             case 'hasRoles':
               midware = hasRoles(...path.auth.roles);
+            case 'hasLoggerRoles':
+              midware = hasLoggerRoles(...path.auth.roles);
               break;
             case 'ownsOrHasRoles':
               midware = ownsOrHasRoles(this.model, ...path.auth.roles);
@@ -214,6 +231,14 @@ export const BasicAuthRouter = new Router('/auth/basic').paths(
     methods: ['post'],
     controller: async (ctx: IContext) => {
       try {
+        if (!ctx.request.fields.username)
+          throw boom.forbidden(
+            Zqs.instance.config.auth.messages.errors.empty_username
+          );
+        if (!ctx.request.fields.password)
+          throw boom.forbidden(
+            Zqs.instance.config.auth.messages.errors.empty_password
+          );
         const auth: any = await AuthModel.findOne({
           username: ctx.request.fields.username,
         }).exec();
@@ -285,6 +310,14 @@ export const BasicAuthRouter = new Router('/auth/basic').paths(
     methods: ['post'],
     controller: async (ctx: IContext) => {
       try {
+        if (!ctx.request.fields.username)
+          throw boom.forbidden(
+            Zqs.instance.config.auth.messages.errors.empty_username
+          );
+        if (!ctx.request.fields.password)
+          throw boom.forbidden(
+            Zqs.instance.config.auth.messages.errors.empty_password
+          );
         const auth = await AuthModel.create({
           username: ctx.request.fields.username,
           password: ctx.request.fields.password,
@@ -347,6 +380,18 @@ export const BasicAuthRouter = new Router('/auth/basic').paths(
     methods: ['post'],
     controller: async (ctx: IContext) => {
       try {
+        if (!ctx.request.fields.username)
+          throw boom.forbidden(
+            Zqs.instance.config.auth.messages.errors.empty_username
+          );
+        if (!ctx.request.fields.oldPassword)
+          throw boom.forbidden(
+            Zqs.instance.config.auth.messages.errors.empty_password
+          );
+        if (!ctx.request.fields.newPassword)
+          throw boom.forbidden(
+            Zqs.instance.config.auth.messages.errors.empty_password
+          );
         const auth: any = await AuthModel.findOne({
           username: ctx.request.fields.username,
         }).exec();
@@ -401,6 +446,168 @@ export const BasicAuthRouter = new Router('/auth/basic').paths(
         description: 'Successful operation',
       },
       403: {
+        description: 'Failed',
+      },
+    },
+  }
+);
+export const LoginInforRouter = new Router('/logger/logininfor').paths(
+  {
+    path: '/',
+    methods: ['get'],
+    controller: async (ctx: IContext) => {
+      try {
+        const hasPermi = Zqs.instance.config.logger.roles.filter(
+          (role: string) => {
+            if (ctx.request.auth.roles.includes(role)) return role;
+          }
+        );
+        if (!hasPermi)
+          throw boom.forbidden(
+            Zqs.instance.config.auth.messages.errors.no_permission
+          );
+        const paginateResult = await paginate(LoginInforModel, ctx);
+        response(ctx, 200, paginateResult);
+      } catch (e) {
+        console.error(e);
+        handleError(ctx, e);
+      }
+    },
+    tags: ['__logger_logininfor'],
+    summary: 'Get list logger with logininfor',
+    description: 'List logger with logininfor',
+    consumes: ['application/json', 'application/xml'],
+    produces: ['application/json', 'application/xml'],
+    parameters: [],
+    responses: {
+      204: {
+        description: 'Successful operation',
+      },
+      '4xx': {
+        description: 'Failed',
+      },
+      '5xx': {
+        description: 'Failed',
+      },
+    },
+  },
+  {
+    path: '/:id',
+    methods: ['delete'],
+    controller: async (ctx: IContext) => {
+      try {
+        const hasPermi = Zqs.instance.config.logger.roles.filter(
+          (role: string) => {
+            if (ctx.request.auth.roles.includes(role)) return role;
+          }
+        );
+        if (!hasPermi)
+          throw boom.forbidden(
+            Zqs.instance.config.auth.messages.errors.no_permission
+          );
+        const entity = await LoginInforModel.findById(ctx.params.id).exec();
+        if (!entity) throw Boom.notFound();
+        await entity.remove();
+        response(ctx, 204);
+      } catch (e) {
+        handleError(ctx, e);
+      }
+    },
+    tags: ['__logger_logininfor'],
+    summary: 'Delete logger with logininfor',
+    description: 'Delete logger with logininfor',
+    consumes: ['application/json', 'application/xml'],
+    produces: ['application/json', 'application/xml'],
+    parameters: [],
+    responses: {
+      204: {
+        description: 'Successful operation',
+      },
+      '4xx': {
+        description: 'Failed',
+      },
+      '5xx': {
+        description: 'Failed',
+      },
+    },
+  }
+);
+export const OperateLogRouter = new Router('/logger/operatelog').paths(
+  {
+    path: '/',
+    methods: ['get'],
+    controller: async (ctx: IContext) => {
+      try {
+        const hasPermi = Zqs.instance.config.logger.roles.filter(
+          (role: string) => {
+            if (ctx.request.auth.roles.includes(role)) return role;
+          }
+        );
+        if (!hasPermi)
+          throw boom.forbidden(
+            Zqs.instance.config.auth.messages.errors.no_permission
+          );
+        const paginateResult = await paginate(OperateLogModel, ctx);
+        response(ctx, 200, paginateResult);
+      } catch (e) {
+        console.error(e);
+        handleError(ctx, e);
+      }
+    },
+    tags: ['__logger_operatelog'],
+    summary: 'Get list logger with operatelog',
+    description: 'List logger with operatelog',
+    consumes: ['application/json', 'application/xml'],
+    produces: ['application/json', 'application/xml'],
+    parameters: [],
+    responses: {
+      204: {
+        description: 'Successful operation',
+      },
+      '4xx': {
+        description: 'Failed',
+      },
+      '5xx': {
+        description: 'Failed',
+      },
+    },
+  },
+  {
+    path: '/:id',
+    methods: ['delete'],
+    controller: async (ctx: IContext) => {
+      try {
+        const hasPermi = Zqs.instance.config.logger.roles.filter(
+          (role: string) => {
+            if (ctx.request.auth.roles.includes(role)) return role;
+          }
+        );
+        if (!hasPermi)
+          throw boom.forbidden(
+            Zqs.instance.config.auth.messages.errors.no_permission
+          );
+        const entity = await OperateLogModel.findById(ctx.params.id).exec();
+        if (!entity) throw Boom.notFound();
+        await entity.remove();
+        response(ctx, 204);
+      } catch (e) {
+        handleError(ctx, e);
+      }
+    },
+    tags: ['__logger_operatelog'],
+    summary: 'Delete logger with operatelog',
+    description: 'Delete logger with operatelog',
+    consumes: ['application/json', 'application/xml'],
+    produces: ['application/json', 'application/xml'],
+    parameters: [],
+    responses: {
+      204: {
+        description: 'Successful operation',
+      },
+      '4xx': {
+        description: 'Failed',
+      },
+      '5xx': {
         description: 'Failed',
       },
     },

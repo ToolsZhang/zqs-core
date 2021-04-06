@@ -8,11 +8,11 @@ import * as etag from 'koa-etag';
 import * as logger from 'koa-logger';
 import * as qs from 'qs';
 import * as xml2json from 'xml2json';
-import { logger as setupLogger } from './logger';
 import { setup as setupAuth } from './auth';
 import { setup as setupHttp } from './http';
 import { setup as setupSpdy } from './spdy';
 import { setup as setupSocket } from './socket';
+import { logger as initLogger, setup as setupLogger } from './logger';
 import { setup as setupMongodb } from './mongodb';
 import { setup as setupPlugins } from './plugins';
 import { setup as setupRouters } from './routers';
@@ -75,10 +75,11 @@ export class Zqs extends koa {
 
     // Setting Logger
     this.use(
-      await setupLogger({
+      await initLogger({
         transporter: (str: string, ...args: string[]) => {
           console.log(str);
         },
+        logger: this.config.logger,
       })
     );
 
@@ -117,6 +118,7 @@ export class Zqs extends koa {
     this.use(etag());
 
     await setupAuth(this);
+    await setupLogger(this);
     await setupPlugins(this, 'pre');
     await setupRouters(this);
     await setupHttp(this);

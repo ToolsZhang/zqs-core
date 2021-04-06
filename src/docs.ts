@@ -323,7 +323,8 @@ export interface IDocs {
       | 'isAuthenticated'
       | 'owns'
       | 'hasRoles'
-      | 'ownsOrHasRoles';
+      | 'ownsOrHasRoles'
+      | 'hasLoggerRoles';
 
     /**
      * Required when type is hasRoles or ownsOrHasRoles

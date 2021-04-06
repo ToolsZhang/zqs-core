@@ -67,6 +67,7 @@ export function Model(options: IModelOptions): IModel {
   if (options.discriminator) {
     model = options.discriminator.discriminator(options.name, options.schema);
   } else {
+    mongoose.set('useCreateIndex', true);
     model = mongoose.model(
       options.name,
       options.schema,
