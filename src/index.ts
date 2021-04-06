@@ -49,7 +49,7 @@ export interface IConfig {
   /**
    * auth config
    */
-  logger: ILoggerConfig
+  logger: ILoggerConfig;
   /**
    * static files config
    */
