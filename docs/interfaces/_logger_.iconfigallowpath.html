@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Socket | zqs-core</title>
+	<title>IConfigAllowPath | zqs-core</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,39 +56,24 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_socket_.html">&quot;socket&quot;</a>
+					<a href="../modules/_logger_.html">&quot;logger&quot;</a>
 				</li>
 				<li>
-					<a href="_socket_.socket.html">Socket</a>
+					<a href="_logger_.iconfigallowpath.html">IConfigAllowPath</a>
 				</li>
 			</ul>
-			<h1>Class Socket</h1>
+			<h1>Interface IConfigAllowPath</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Socket class</p>
-					</div>
-					<p>To use this, just create a file named socket.ts in your api directory.
-					Paste following code to the file</p>
-					<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Socket } form <span class="hljs-string">'zqs-core/lib/socket'</span>;
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> Socket(<span class="hljs-string">'room_name_here'</span>);</code></pre>
-					<p>To emit a event</p>
-					<pre><code class="language-ts"><span class="hljs-keyword">import</span> socket <span class="hljs-keyword">from</span> <span class="hljs-string">'./socket'</span>;
-socket.emit(<span class="hljs-string">'event:name'</span>, <span class="hljs-string">'some text'</span>);</code></pre>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Socket</span>
+						<span class="target">IConfigAllowPath</span>
 					</li>
 				</ul>
 			</section>
@@ -97,145 +82,80 @@ socket.emit(<span class="hljs-string">'event:name'</span>, <span class="hljs-str
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_socket_.socket.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_socket_.socket.html#room" class="tsd-kind-icon">room</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Methods</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_socket_.socket.html#emit" class="tsd-kind-icon">emit</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_socket_.socket.html#register" class="tsd-kind-icon">register</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_logger_.iconfigallowpath.html#logtype" class="tsd-kind-icon">log<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_logger_.iconfigallowpath.html#loginforparams" class="tsd-kind-icon">loginfor<wbr>Params</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_logger_.iconfigallowpath.html#operlogparams" class="tsd-kind-icon">operlog<wbr>Params</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_logger_.iconfigallowpath.html#url" class="tsd-kind-icon">url</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Socket<span class="tsd-signature-symbol">(</span>room<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_socket_.socket.html" class="tsd-signature-type">Socket</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/socket.ts#L30">src/socket.ts:30</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Creating a socket object</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>room: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>room name</p>
-										</div>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_socket_.socket.html" class="tsd-signature-type">Socket</a></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="room" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> room</h3>
-					<div class="tsd-signature tsd-kind-icon">room<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="logtype" class="tsd-anchor"></a>
+					<h3>log<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">log<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_logger_.iconfiglogtype.html" class="tsd-signature-type">IConfigLogType</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/socket.ts#L30">src/socket.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/logger.ts#L468">src/logger.ts:468</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>日志类型 (&#39;login&#39; &#39;operate&#39;)</p>
+						</div>
+					</div>
 				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="emit" class="tsd-anchor"></a>
-					<h3>emit</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/socket.ts#L53">src/socket.ts:53</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Emitting event to all members in the room</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>event: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>event name</p>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>something</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="loginforparams" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> loginfor<wbr>Params</h3>
+					<div class="tsd-signature tsd-kind-icon">loginfor<wbr>Params<span class="tsd-signature-symbol">:</span> <a href="_logger_.iconfigloginpath.html" class="tsd-signature-type">IConfigLoginPath</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/logger.ts#L474">src/logger.ts:474</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>login类型 参数配置
+							当日志类型 为login时必填</p>
+						</div>
+					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="register" class="tsd-anchor"></a>
-					<h3>register</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">register<span class="tsd-signature-symbol">(</span>socket<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Socket</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/socket.ts#L44">src/socket.ts:44</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Adding socket to the room</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>socket: <span class="tsd-signature-type">Socket</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>socket</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="operlogparams" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> operlog<wbr>Params</h3>
+					<div class="tsd-signature tsd-kind-icon">operlog<wbr>Params<span class="tsd-signature-symbol">:</span> <a href="_logger_.iconfigoperatepath.html" class="tsd-signature-type">IConfigOperatePath</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/logger.ts#L480">src/logger.ts:480</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>operate类型 参数配置
+							当日志类型 为operate时必填</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="url" class="tsd-anchor"></a>
+					<h3>url</h3>
+					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/logger.ts#L463">src/logger.ts:463</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>日志初始化路径</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -269,7 +189,7 @@ socket.emit(<span class="hljs-string">'event:name'</span>, <span class="hljs-str
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_http_.html">&quot;http&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_logger_.html">&quot;logger&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -287,7 +207,7 @@ socket.emit(<span class="hljs-string">'event:name'</span>, <span class="hljs-str
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_routers_.html">&quot;routers&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_socket_.html">&quot;socket&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -300,35 +220,83 @@ socket.emit(<span class="hljs-string">'event:name'</span>, <span class="hljs-str
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
+						<a href="../enums/_logger_.iconfiglogtype.html" class="tsd-kind-icon">IConfig<wbr>Log<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
+						<a href="../enums/_logger_.iconfigoperatortype.html" class="tsd-kind-icon">IConfig<wbr>Operator<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_logger_.iconfig.html" class="tsd-kind-icon">IConfig</a>
+					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_socket_.socket.html" class="tsd-kind-icon">Socket</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_logger_.iconfigallowpath.html" class="tsd-kind-icon">IConfig<wbr>Allow<wbr>Path</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_socket_.socket.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_logger_.iconfigallowpath.html#logtype" class="tsd-kind-icon">log<wbr>Type</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_socket_.socket.html#room" class="tsd-kind-icon">room</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_logger_.iconfigallowpath.html#loginforparams" class="tsd-kind-icon">loginfor<wbr>Params</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_socket_.socket.html#emit" class="tsd-kind-icon">emit</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_logger_.iconfigallowpath.html#operlogparams" class="tsd-kind-icon">operlog<wbr>Params</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_socket_.socket.html#register" class="tsd-kind-icon">register</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_logger_.iconfigallowpath.html#url" class="tsd-kind-icon">url</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_socket_.iconfig.html" class="tsd-kind-icon">IConfig</a>
+						<a href="_logger_.iconfiglogininfor.html" class="tsd-kind-icon">IConfig<wbr>Login<wbr>Infor</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_socket_.html#io" class="tsd-kind-icon">io</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_logger_.iconfigloginpath.html" class="tsd-kind-icon">IConfig<wbr>Login<wbr>Path</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_logger_.iconfigoperatelog.html" class="tsd-kind-icon">IConfig<wbr>Operate<wbr>Log</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_logger_.iconfigoperatepath.html" class="tsd-kind-icon">IConfig<wbr>Operate<wbr>Path</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="../modules/_logger_.html#logininformodel" class="tsd-kind-icon">Login<wbr>Infor<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="../modules/_logger_.html#logininforschema" class="tsd-kind-icon">Login<wbr>Infor<wbr>Schema</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="../modules/_logger_.html#operatelogmodel" class="tsd-kind-icon">Operate<wbr>Log<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="../modules/_logger_.html#operatelogschema" class="tsd-kind-icon">Operate<wbr>Log<wbr>Schema</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_logger_.html#executefilters" class="tsd-kind-icon">execute<wbr>Filters</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_logger_.html#formatfilters" class="tsd-kind-icon">format<wbr>Filters</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_logger_.html#getip" class="tsd-kind-icon">get<wbr>Ip</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_logger_.html#getoperatortype" class="tsd-kind-icon">get<wbr>Operator<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_logger_.html#log" class="tsd-kind-icon">log</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="../modules/_socket_.html#setup" class="tsd-kind-icon">setup</a>
+						<a href="../modules/_logger_.html#logger" class="tsd-kind-icon">logger</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_logger_.html#setup" class="tsd-kind-icon">setup</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_logger_.html#colorcodes" class="tsd-kind-icon">color<wbr>Codes</a>
 					</li>
 				</ul>
 			</nav>

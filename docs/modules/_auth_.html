@@ -82,6 +82,7 @@
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_auth_.html#authmodel" class="tsd-kind-icon">Auth<wbr>Model</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_auth_.html#authschema" class="tsd-kind-icon">Auth<wbr>Schema</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_auth_.html#attach" class="tsd-kind-icon">attach</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_auth_.html#hasloggerroles" class="tsd-kind-icon">has<wbr>Logger<wbr>Roles</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_auth_.html#hasroles" class="tsd-kind-icon">has<wbr>Roles</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_auth_.html#isauthenticated" class="tsd-kind-icon">is<wbr>Authenticated</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_auth_.html#owns" class="tsd-kind-icon">owns</a></li>
@@ -108,7 +109,7 @@
 					<div class="tsd-signature tsd-kind-icon">Auth<wbr>Model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Model</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Document</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/b510e98/src/auth.ts#L343">src/auth.ts:343</a></li>
+							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/auth.ts#L364">src/auth.ts:364</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -123,7 +124,7 @@
 					<div class="tsd-signature tsd-kind-icon">Auth<wbr>Schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Schema</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/b510e98/src/auth.ts#L338">src/auth.ts:338</a></li>
+							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/auth.ts#L359">src/auth.ts:359</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -138,7 +139,7 @@
 					<div class="tsd-signature tsd-kind-icon">attach<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/b510e98/src/auth.ts#L379">src/auth.ts:379</a></li>
+							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/auth.ts#L400">src/auth.ts:400</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -163,12 +164,53 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
+					<a name="hasloggerroles" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagLet">Let</span> has<wbr>Logger<wbr>Roles</h3>
+					<div class="tsd-signature tsd-kind-icon">has<wbr>Logger<wbr>Roles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/auth.ts#L417">src/auth.ts:417</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Middleware to check if the logger has specified roles.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>specified roles</p>
+							</dd>
+						</dl>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>roles<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>roles: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
 					<a name="hasroles" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagLet">Let</span> has<wbr>Roles</h3>
 					<div class="tsd-signature tsd-kind-icon">has<wbr>Roles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/b510e98/src/auth.ts#L390">src/auth.ts:390</a></li>
+							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/auth.ts#L411">src/auth.ts:411</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -209,7 +251,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Authenticated<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/b510e98/src/auth.ts#L384">src/auth.ts:384</a></li>
+							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/auth.ts#L405">src/auth.ts:405</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -239,7 +281,7 @@
 					<div class="tsd-signature tsd-kind-icon">owns<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/b510e98/src/auth.ts#L395">src/auth.ts:395</a></li>
+							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/auth.ts#L422">src/auth.ts:422</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -275,7 +317,7 @@
 					<div class="tsd-signature tsd-kind-icon">owns<wbr>OrHas<wbr>Roles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/b510e98/src/auth.ts#L401">src/auth.ts:401</a></li>
+							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/auth.ts#L428">src/auth.ts:428</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -315,7 +357,7 @@
 					<div class="tsd-signature tsd-kind-icon">sign<wbr>Token<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/b510e98/src/auth.ts#L348">src/auth.ts:348</a></li>
+							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/auth.ts#L369">src/auth.ts:369</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -354,7 +396,7 @@
 					<div class="tsd-signature tsd-kind-icon">verify<wbr>Token<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/b510e98/src/auth.ts#L356">src/auth.ts:356</a></li>
+							<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/auth.ts#L377">src/auth.ts:377</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -397,7 +439,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/b510e98/src/auth.ts#L367">src/auth.ts:367</a></li>
+									<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/auth.ts#L388">src/auth.ts:388</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -429,7 +471,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/b510e98/src/auth.ts#L12">src/auth.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/ToolsZhang/zqs-core/blob/529c6c0/src/auth.ts#L12">src/auth.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -475,6 +517,9 @@
 						<a href="_http_.html">&quot;http&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="_logger_.html">&quot;logger&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="_mm2ssd_.html">&quot;mm2ssd&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -513,6 +558,9 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
 						<a href="_auth_.html#attach" class="tsd-kind-icon">attach</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="_auth_.html#hasloggerroles" class="tsd-kind-icon">has<wbr>Logger<wbr>Roles</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
 						<a href="_auth_.html#hasroles" class="tsd-kind-icon">has<wbr>Roles</a>
