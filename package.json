@@ -1,6 +1,6 @@
 {
   "name": "zqs-core",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A simple restful server framework using node and typescript",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -39,7 +39,7 @@
     "@types/koa": "^2.11.3",
     "@types/koa-router": "^7.4.1",
     "@types/lodash": "^4.14.155",
-    "@types/mongoose": "^5.7.24",
+    "@types/mongoose": "~5.7.24",
     "@types/mongoose-paginate": "^5.0.8",
     "@types/node": "^8.10.61",
     "@types/socket.io": "^2.1.8",

@@ -13,7 +13,6 @@ export function handleError(
   error: any,
   statusCode: number = 500
 ): void {
-  console.log(error);
   let be: boom.Boom;
   let attributes;
   if (error.isBoom) {
