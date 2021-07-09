@@ -155,8 +155,8 @@ export async function setup(app: Zqs) {
      * @api public
      */
     async authenticate(password): Promise<boolean> {
-      const pwdGen = await this.encryptPassword(password);
-      return this.password === pwdGen;
+      const pwdGen = await this['encryptPassword'](password);
+      return this['password'] === pwdGen;
     },
 
     /**
@@ -188,10 +188,10 @@ export async function setup(app: Zqs) {
     encryptPassword(password): Promise<string> {
       return new Promise((resolve, reject) => {
         if (!password) reject(new Error('Missing password'));
-        if (!this.salt) reject(new Error('Missing salt'));
+        if (!this['salt']) reject(new Error('Missing salt'));
         const defaultIterations = 10000;
         const defaultKeyLength = 64;
-        const salt = new Buffer(this.salt, 'base64');
+        const salt = new Buffer(this['salt'], 'base64');
         return crypto.pbkdf2(
           password,
           salt,
