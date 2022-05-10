@@ -76,10 +76,8 @@ export async function setup(app: Zqs) {
     }
   }
   let port;
-  if (config.singlePort) 
-    port = config.startPort
-  else
-    port = config.startPort + ~~process.env.pm_id;
+  if (config.singlePort) port = config.startPort;
+  else port = config.startPort + ~~process.env.pm_id;
   io = IO(port);
   io.adapter(redis(config.redis));
   io.on('connection', socket => {
@@ -111,7 +109,6 @@ export interface IConfig {
    * redis options
    */
   redis: redis.SocketIORedisOptions;
-
 
   /**
    * Use single port.
